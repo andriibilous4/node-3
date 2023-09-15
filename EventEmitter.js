@@ -1,6 +1,14 @@
 
  class EventEmitter {
   listeners = {};  // key-value pair
+  instance = null;
+
+  constructor(){
+    if(this.instance){
+      throw new Error('Cannot create more than one Event Emitter');
+    }
+    this.instance = 1;
+  }
  
   addListener(eventName, fn) {
     if(!this.listeners[eventName]){
@@ -39,7 +47,7 @@
  
   listenerCount(eventName) {
     if(!this.listeners[eventName]) return 0;
-    return this.listeners[eventName].length()
+    return this.listeners[eventName].length
   }
  
   rawListeners(eventName) {
